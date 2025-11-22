@@ -1,14 +1,16 @@
 package com.h12.vendaproduto.domain;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class Categoria implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * 
+     */
+    @Serial
+    private static final long serialVersionUID = 1L;
 	
 	
 	
