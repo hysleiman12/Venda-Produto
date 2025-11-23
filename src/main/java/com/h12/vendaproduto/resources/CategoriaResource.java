@@ -3,29 +3,31 @@ package com.h12.vendaproduto.resources;
 import java.util.ArrayList;
 import java.util.List;
 
-//import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.h12.vendaproduto.domain.Categoria;
+import com.h12.vendaproduto.services.CategoriaService;
 
 //EndPoint 
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
+	
+	@Autowired
+	private CategoriaService service;
+	
 
 	//@GetMapping
-	@RequestMapping(method=RequestMethod.GET )
-	public List<Categoria> listar() {
-		
-		Categoria categoria01 = new Categoria(1, "Calças");
-		Categoria categoria02 = new Categoria(2, "Camisas/Camisetas");
-		
-		List<Categoria> lista = new ArrayList<>();
-		lista.add(categoria01);
-		lista.add(categoria02);
-		return lista;
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable Integer id) {
+		Categoria obj = service.buscar(id);
+		return ResponseEntity.ok().body(obj);
 		
 	}
 }
